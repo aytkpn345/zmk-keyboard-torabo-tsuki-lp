@@ -219,7 +219,7 @@
                 /* M row 1: left outer->inner | right inner->outer */
                 &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp MINUS
                 /* M row 2; positions 30/31 are not used on M */
-                &kp TAB  &td2 3 A  &td8 LSHIFT S  &kp D  &kp F  &kp G  &none  &none  &kp H  &kp J  &kp K  &kp L  &td1 4 SEMI  &kp SQT
+                &mo 10  &td2 3 A  &td8 LSHIFT S  &kp D  &kp F  &kp G  &none  &none  &kp H  &kp J  &kp K  &kp L  &td1 4 SEMI  &kp SQT
                 /* M row 3 */
                 &kp LSHIFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &mo 9  &mo 9  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &td7 RSHIFT INT1
                 /* M bottom/thumb row; right-ball occupies positions 61/62 */
@@ -361,5 +361,26 @@
                 &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none /* USER00 unresolved: custom Cornix keycode */  &none /* USER01 unresolved: custom Cornix keycode */  &none /* USER02 unresolved: custom Cornix keycode */
             >;
         };
+
+        /* Keeps the normal key bindings available while the scroll layer is held. */
+        layer_10 {
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+    };
+};
+
+/* Convert the trackball's X/Y motion to scrolling while layer 10 is active. */
+&pointing_listener {
+    scroll_layer {
+        layers = <10>;
+        input-processors =
+            <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+            <&zip_xy_to_scroll_mapper>;
     };
 };
