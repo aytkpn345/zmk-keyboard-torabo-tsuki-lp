@@ -223,7 +223,7 @@
                 /* M row 3 */
                 &kp LSHIFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &mo 9  &mo 9  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &td7 RSHIFT INT1
                 /* M bottom/thumb row; right-ball occupies positions 61/62 */
-                &kp LCTRL  &kp LGUI  &kp LALT  &mo 1  &td0 LCTRL SPACE  &td5 LALT LANG2  &mo 2  &td6 RALT LANG1  &td3 RCTRL ENTER  &none  &none  &kp LEFT  &kp SPACE  &kp RIGHT
+                &none  &kp LCTRL  &kp LGUI  &kp LALT  &mo 1  &td0 LCTRL SPACE  &td5 LALT LANG2  &td6 2 LANG1  &td3 RCTRL ENTER  &none  &none  &kp LEFT  &kp SPACE  &kp RIGHT
             >;
         };
 
