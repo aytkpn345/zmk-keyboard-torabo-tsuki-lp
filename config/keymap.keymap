@@ -1,17 +1,211 @@
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/behaviors.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
+/*
+ * cornix_layout_20260814.vil -> torabo-tsuki LP (M, right trackball)
+ *
+ * Conversion policy:
+ * - Keeps the official torabo-tsuki LP keymap's 66-position L-layout format.
+ * - Maps the 50 Cornix bindings onto the 50 populated Choc switches of the
+ *   M-size, right-trackball arrangement.
+ * - Cornix's right-thumb MO(2) position is moved to the extra innermost key
+ *   on the left bottom/thumb row (Torabo logical position 58). This preserves
+ *   the three outer right-thumb keys (LEFT / SPACE / RIGHT), while the right
+ *   trackball replaces logical positions 61 and 62.
+ * - Torabo logical positions 61 and 62 are intentionally left &none.
+ * - USER00/01/02/06 cannot be reconstructed from a .vil export and are &none.
+ * - M8/M9/M14 are empty in the source .vil and are kept as no-op.
+ * - KC_ACL2 (QMK mouse acceleration preset) has no direct ZMK equivalent and
+ *   is kept as no-op.
+ * - Combo timeout is preserved from Vial QMK Settings (20 ms).
+ * - Encoder mappings from the Cornix .vil are not included because
+ *   torabo-tsuki LP has no equivalent rotary encoder in this keymap.
+ *
+ * IMPORTANT:
+ * This is a semantic conversion, not a byte-for-byte conversion between QMK
+ * and ZMK. Hold/tap timing terms are preserved; interruption behavior uses
+ * ZMK's "tap-preferred" flavor, which is closest to QMK's default resolution.
+ */
+
 / {
+    behaviors {
+        td0: vial_td0_space_lctrl {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <80>;
+            quick-tap-ms = <0>;
+            bindings = <&kp>, <&kp>;
+            display-name = "TD0 Space/LCTRL";
+        };
+
+        td1: vial_td1_semi_layer4 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <80>;
+            quick-tap-ms = <0>;
+            bindings = <&mo>, <&kp>;
+            display-name = "TD1 ;/Layer4";
+        };
+
+        td2: vial_td2_a_layer3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <110>;
+            quick-tap-ms = <0>;
+            bindings = <&mo>, <&kp>;
+            display-name = "TD2 A/Layer3";
+        };
+
+        td3: vial_td3_enter_rctrl {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            quick-tap-ms = <0>;
+            bindings = <&kp>, <&kp>;
+            display-name = "TD3 Enter/RCTRL";
+        };
+
+        td4: vial_td4_enter_layer3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <60>;
+            quick-tap-ms = <0>;
+            bindings = <&mo>, <&kp>;
+            display-name = "TD4 Enter/Layer3";
+        };
+
+        td5: vial_td5_lang2_lalt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            quick-tap-ms = <0>;
+            bindings = <&kp>, <&kp>;
+            display-name = "TD5 LANG2/LALT";
+        };
+
+        td6: vial_td6_lang1_ralt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            quick-tap-ms = <0>;
+            bindings = <&kp>, <&kp>;
+            display-name = "TD6 LANG1/RALT";
+        };
+
+        td7: vial_td7_ro_rshift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            quick-tap-ms = <0>;
+            bindings = <&kp>, <&kp>;
+            display-name = "TD7 RO/RSHIFT";
+        };
+
+        td8: vial_td8_s_lshift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <100>;
+            quick-tap-ms = <0>;
+            bindings = <&kp>, <&kp>;
+            display-name = "TD8 S/LSHIFT";
+        };
+
+        /* Defined in the .vil but not currently used by any key position. */
+        td9: vial_td9_lbracket_lbrace {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <81>;
+            bindings = <&kp LBKT>, <&kp LS(LBKT)>;
+            display-name = "TD9 [/{";
+        };
+    };
+
+    macros {
+        macro7: vial_macro7 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings =
+                <&kp LS(R)>
+                , <&kp LS(B)>
+                , <&kp LS(L)>
+                , <&kp N2>
+                , <&kp N5>
+                , <&kp LS(O)>
+                , <&kp N>
+                , <&kp O>
+                , <&kp R>
+                , <&kp EXCL>
+                , <&kp T>
+                , <&kp A>
+                , <&kp I>
+                ;
+            display-name = "Vial Macro 7";
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
-        bt_clear {
-            bindings = <&bt BT_CLR>;
-            key-positions = <28 29>;
-            layers = <2>;
+        combo_df_star {
+            timeout-ms = <20>;
+            key-positions = <27 28>;
+            bindings = <&kp LS(N8)>;
+            layers = <0>;
+        };
+        combo_jk_lparen {
+            timeout-ms = <20>;
+            key-positions = <33 34>;
+            bindings = <&kp LS(N9)>;
+            layers = <0>;
+        };
+        combo_cv_rbracket {
+            timeout-ms = <20>;
+            key-positions = <41 42>;
+            bindings = <&kp RBKT>;
+            layers = <0>;
+        };
+        combo_mcomma_nuhs {
+            timeout-ms = <20>;
+            key-positions = <47 48>;
+            bindings = <&kp NUHS>;
+            layers = <0>;
+        };
+        combo_er_rbrace {
+            timeout-ms = <20>;
+            key-positions = <15 16>;
+            bindings = <&kp LS(RBKT)>;
+            layers = <0>;
+        };
+        combo_ima_empty_m14 {
+            timeout-ms = <20>;
+            key-positions = <20 47 25>;
+            bindings = <&none /* M14 is empty in the .vil */>;
+            layers = <0>;
+        };
+        combo_ui_shift_nuhs {
+            timeout-ms = <20>;
+            key-positions = <19 20>;
+            bindings = <&kp LS(NUHS)>;
+            layers = <0>;
+        };
+        combo_mt_lbracket {
+            timeout-ms = <20>;
+            key-positions = <47 17>;
+            bindings = <&kp LBKT>;
+            layers = <0>;
         };
     };
 
@@ -20,41 +214,151 @@
 
         layer_0 {
             bindings = <
-&kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                       &kp N6     &kp N7    &kp N8     &kp N9    &kp N0                &kp BSPC
-&kp TAB    &kp Q      &kp W     &kp E     &kp R     &kp T                                                        &kp Y      &kp U     &kp I      &kp O     &kp P                 &kp BSPC
-&kp TAB    &kp A      &kp S     &kp D     &kp F     &kp G      &mkp LCLK                  &mkp RCLK              &kp H      &kp J     &kp K      &kp L     &kp SEMI              &kp SQT
-&kp LSHFT  &kp Z      &kp X     &kp C     &kp V     &kp B      &kp SPACE                  &kp RET                &kp N      &kp M     &kp COMMA  &kp DOT   &mt RIGHT_SHIFT FSLH  &kp RSHFT
-&kp LCTRL  &kp LCTRL  &kp LGUI  &kp LALT  &kp BSPC  &kp SPACE  &mt LEFT_SHIFT LANGUAGE_1  &mt RSHIFT LANGUAGE_2  &kp ENTER  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL             &kp RCTRL
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp MINUS
+                /* M row 2; positions 30/31 are not used on M */
+                &kp TAB  &td2 3 A  &td8 LSHIFT S  &kp D  &kp F  &kp G  &none  &none  &kp H  &kp J  &kp K  &kp L  &td1 4 SEMI  &kp SQT
+                /* M row 3 */
+                &kp LSHIFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &mo 9  &mo 9  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &td7 RSHIFT INT1
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &kp LCTRL  &kp LGUI  &kp LALT  &mo 1  &td0 LCTRL SPACE  &td5 LALT LANG2  &mo 2  &td6 RALT LANG1  &td3 RCTRL ENTER  &none  &none  &kp LEFT  &kp SPACE  &kp RIGHT
             >;
         };
 
         layer_1 {
             bindings = <
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &mkp RCLK  &mkp LCLK  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &kp ESC  &none  &none  &kp END  &none  &none  &none  &none  &kp UP  &kp BSPC  &none  &kp INS
+                /* M row 2; positions 30/31 are not used on M */
+                &kp ENTER  &kp HOME  &none  &kp DEL  &kp BSPC  &none  &none  &none  &none  &kp LEFT  &kp DOWN  &kp RIGHT  &none  &none
+                /* M row 3 */
+                &trans  &none  &none  &none /* M8 is empty in the .vil */  &none /* M9 is empty in the .vil */  &none  &none  &none  &none  &kp LC(LG(LEFT))  &kp LC(LG(RIGHT))  &none  &none  &trans
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &macro7  &none  &none  &none  &none  &none  &kp RALT  &trans  &none  &none  &none  &none  &none
             >;
         };
 
         layer_2 {
             bindings = <
-&trans  &trans            &trans            &trans      &trans      &trans                      &trans          &trans         &trans            &trans             &trans         &trans
-&trans  &kp LS(NUMBER_1)  &kp LS(NUMBER_2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                  &kp LS(N6)      &kp LS(N7)     &kp LS(N8)        &kp LS(N9)         &kp LS(N0)     &trans
-&trans  &kp N1            &kp N2            &kp N3      &kp N4      &kp N5      &trans  &trans  &kp LEFT_BRACE  &kp MINUS      &kp EQUAL         &kp RIGHT_BRACE    &kp COLON      &trans
-&trans  &kp N6            &kp N7            &kp N8      &kp N9      &kp N0      &trans  &trans  &kp LS(MINUS)   &kp LS(EQUAL)  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
-&trans  &trans            &trans            &trans      &trans      &trans      &trans  &trans  &kp TAB         &kp DEL        &trans            &trans             &trans         &trans
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &kp F9  &kp F10  &kp F11  &kp F12  &kp CAPS  &kp KP_NUMLOCK  &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp LS(INT3)  &kp EQUAL
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &kp F5  &kp F6  &kp F7  &kp F8  &none  &none  &none  &none  &kp KP_N4  &kp KP_N5  &kp KP_N6  &none  &none
+                /* M row 3 */
+                &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none  &none  &none  &kp KP_N0  &kp KP_N1  &kp KP_N2  &kp KP_N3  &none  &trans
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &trans  &trans  &trans  &none  &none  &none  &none  &none  &none  &none  &none
             >;
         };
 
         layer_3 {
             bindings = <
-&trans  &trans   &trans   &trans        &trans        &trans                      &trans            &trans     &trans         &trans     &trans      &trans
-&trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME          &kp PG_UP  &kp PAGE_DOWN  &kp END    &kp ESCAPE  &trans
-&trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT          &kp DOWN   &kp UP_ARROW   &kp RIGHT  &kp TAB     &trans
-&trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
-&trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &trans     &trans         &trans     &trans      &trans
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &none  &kp LC(LG(LEFT))  &kp LG(UP)  &kp LC(LG(RIGHT))  &none  &mkp LCLK  &mmv MOVE_UP  &mkp RCLK  &none  &none  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &none  &kp LG(LEFT)  &kp LG(TAB)  &kp LG(RIGHT)  &none  &none  &none  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &none  &none  &none
+                /* M row 3 */
+                &none  &none  &kp LC(LS(TAB))  &none  &kp LC(TAB)  &none  &none  &none  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP  &msc SCRL_RIGHT  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &none  &kp PSCRN  &none  &kp C_AC_FORWARD  &none /* KC_ACL2: no direct ZMK equivalent */  &kp C_AC_BACK  &none  &none  &none  &none  &none
+            >;
+        };
+
+        layer_4 {
+            bindings = <
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &kp LS(LBKT)  &none  &kp LS(N1)  &kp LS(N2)  &kp LS(EQUAL)  &kp INT3  &kp LS(INT1)  &kp LS(INT3)  &none  &kp LS(N5)  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &kp LBKT  &kp LS(N3)  &kp LS(N4)  &none  &none  &none  &none  &kp EQUAL  &none  &none  &none  &none  &none
+                /* M row 3 */
+                &kp LSHIFT  &none  &none  &none  &none  &kp LS(LBKT)  &none  &none  &kp LS(N6)  &none  &none  &none  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &trans  &trans  &trans  &trans  &trans  &trans  &none  &none  &none  &none  &none
+            >;
+        };
+
+        layer_5 {
+            bindings = <
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 3 */
+                &none  &none  &none  &none  &none  &none  &kp C_MUTE  &mkp MCLK  &none  &none  &none  &none  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+            >;
+        };
+
+        layer_6 {
+            bindings = <
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 3 */
+                &none  &none  &none  &none  &none  &none  &kp C_MUTE  &mkp MCLK  &none  &none  &none  &none  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+            >;
+        };
+
+        layer_7 {
+            bindings = <
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 3 */
+                &none  &none  &none  &none  &none  &none  &kp C_MUTE  &mkp MCLK  &none  &none  &none  &none  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+            >;
+        };
+
+        layer_8 {
+            bindings = <
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 3 */
+                &none  &none  &none  &none  &none  &none  &kp C_MUTE  &mkp MCLK  &none  &none  &none  &none  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+            >;
+        };
+
+        layer_9 {
+            bindings = <
+                /* L-size-only number row; absent on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 1: left outer->inner | right inner->outer */
+                &none /* USER06 unresolved: custom Cornix keycode */  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 2; positions 30/31 are not used on M */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
+                /* M row 3 */
+                &none  &none  &none  &none  &none  &none  &kp C_MUTE  &mkp MCLK  &none  &none  &none  &none  &none  &none
+                /* M bottom/thumb row; right-ball occupies positions 61/62 */
+                &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none  &none /* USER00 unresolved: custom Cornix keycode */  &none /* USER01 unresolved: custom Cornix keycode */  &none /* USER02 unresolved: custom Cornix keycode */
             >;
         };
     };
