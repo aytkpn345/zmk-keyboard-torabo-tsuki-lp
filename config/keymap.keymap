@@ -172,7 +172,7 @@
 
         combo_cv_rbracket {
             timeout-ms = <20>;
-            key-positions = <47 48>;
+            key-positions = <42 41>;
             bindings = <&kp RBKT>;
             layers = <0>;
         };
@@ -193,8 +193,8 @@
 
         combo_mt_lbracket {
             timeout-ms = <20>;
-            key-positions = <42 41>;
-            bindings = <&kp LBKT>;
+            key-positions = <47 48>;
+            bindings = <&kp NUHS>;
             layers = <0>;
         };
     };
