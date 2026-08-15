@@ -177,24 +177,10 @@
             layers = <0>;
         };
 
-        combo_mcomma_nuhs {
-            timeout-ms = <20>;
-            key-positions = <47 48>;
-            bindings = <&kp NUHS>;
-            layers = <0>;
-        };
-
         combo_er_rbrace {
             timeout-ms = <20>;
             key-positions = <15 16>;
             bindings = <&kp LS(RBKT)>;
-            layers = <0>;
-        };
-
-        combo_ima_empty_m14 {
-            timeout-ms = <20>;
-            key-positions = <20 47 25>;
-            bindings = <&none /* M14 is empty in the .vil */>;
             layers = <0>;
         };
 
