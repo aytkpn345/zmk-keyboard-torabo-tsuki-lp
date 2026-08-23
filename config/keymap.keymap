@@ -152,6 +152,15 @@
             bindings = <&kp LS(R) &kp LS(B) &kp LS(L) &kp N2 &kp N5 &kp LS(O) &kp N &kp O &kp R &kp EXCL &kp T &kp A &kp I>;
             display-name = "Vial Macro 7";
         };
+
+        ios_macro_right_brace: ios_macro_right_brace {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings = <&kp Z &kp R &kp SPACE &kp BSPC>;
+            display-name = "iOS Text Replacement: Right Brace";
+        };
     };
 
     combos {
@@ -197,6 +206,49 @@
             key-positions = <47 48>;
             bindings = <&kp NUHS>;
             layers = <0>;
+        };
+
+        /* iOS Japanese input combinations (layer 11 only). */
+        combo_df_lparen_ios {
+            timeout-ms = <20>;
+            key-positions = <27 28>;
+            bindings = <&kp LS(N9)>;
+            layers = <11>;
+        };
+
+        combo_jk_rparen_ios {
+            timeout-ms = <20>;
+            key-positions = <33 34>;
+            bindings = <&kp LS(N0)>;
+            layers = <11>;
+        };
+
+        combo_cv_lcorner_ios {
+            timeout-ms = <20>;
+            key-positions = <42 41>;
+            bindings = <&kp LBKT>;
+            layers = <11>;
+        };
+
+        combo_er_lbrace_ios {
+            timeout-ms = <20>;
+            key-positions = <15 16>;
+            bindings = <&kp LS(LBKT)>;
+            layers = <11>;
+        };
+
+        combo_ui_rbrace_ios {
+            timeout-ms = <20>;
+            key-positions = <19 20>;
+            bindings = <&ios_macro_right_brace>;
+            layers = <11>;
+        };
+
+        combo_mcomma_rcorner_ios {
+            timeout-ms = <20>;
+            key-positions = <47 48>;
+            bindings = <&kp RBKT>;
+            layers = <11>;
         };
     };
 
