@@ -299,7 +299,7 @@
 &none  &none  &none  &none  &none       &none                       &none         &none         &none         &none         &none  &none
 &none  &none  &none  &none  &bt BT_CLR  &none  &none  &none         &none         &none         &none         &none         &none  &none
 &none  &none  &none  &none  &none       &none  &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none
-&none  &none  &none  &none  &none       &none  &none  &none         &none         &none         &none         &none         &none  &none
+&to 11 &none  &none  &none  &none       &none  &none  &none         &none         &none         &none         &none         &none  &none
             >;
         };
 
@@ -312,6 +312,17 @@
 &none  &none  &kp LG(LEFT)      &kp LG(TAB)  &kp LG(RIGHT)      &none  &none  &none          &kp LG(LEFT)      &mkp LCLK         &mkp MCLK         &mkp RCLK          &kp LG(RIGHT)  &none
 &none  &none  &kp LC(LS(TAB))   &none        &kp LC(TAB)        &none  &none  &none          &none             &kp LG(LC(LEFT))  &kp LG(TAB)       &kp LC(LG(RIGHT))  &none          &none
 &none  &none  &none             &none        &kp PSCRN          &none  &none  &kp C_AC_BACK  &kp C_AC_FORWARD  &none             &none             &none              &none          &none
+            >;
+        };
+
+        /* iOS overlay: use Command in the physical Ctrl positions. */
+        layer_11 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&to 0   &kp LGUI  &trans  &trans  &trans  &td0 LGUI SPACE  &trans  &trans  &td3 RGUI ENTER  &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
