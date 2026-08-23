@@ -307,11 +307,11 @@
 
         layer_10 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&none  &none  &none             &none        &none              &none                        &none             &none             &none             &none              &none          &none
+&none  &none  &kp LC(LG(LEFT))  &kp LG(UP)   &kp LC(LG(RIGHT))  &none                        &none             &kp LS(LC(TAB))   &kp LG(UP_ARROW)  &kp LC(TAB)        &none          &none
+&none  &none  &kp LG(LEFT)      &kp LG(TAB)  &kp LG(RIGHT)      &none  &none  &none          &kp LG(LEFT)      &mkp LCLK         &mkp MCLK         &mkp RCLK          &kp LG(RIGHT)  &none
+&none  &none  &kp LC(LS(TAB))   &none        &kp LC(TAB)        &none  &none  &none          &none             &kp LG(LC(LEFT))  &kp LG(TAB)       &kp LC(LG(RIGHT))  &none          &none
+&none  &none  &none             &none        &kp PSCRN          &none  &none  &kp C_AC_BACK  &kp C_AC_FORWARD  &none             &none             &none              &none          &none
             >;
         };
     };
