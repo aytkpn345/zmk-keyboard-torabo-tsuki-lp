@@ -298,11 +298,11 @@
 
         symbol {
             bindings = <
-&none       &none         &none       &none       &none       &none                          &none       &none         &none         &none  &none       &none
-&none       &kp LS(LBKT)  &none       &kp LS(N1)  &kp LS(N2)  &kp LS(EQUAL)                  &kp INT3    &kp LS(INT1)  &kp LS(INT3)  &none  &kp LS(N5)  &none
-&none       &kp LBKT      &kp LS(N3)  &kp LS(N4)  &none       &none          &none   &none   &kp EQUAL   &none         &none         &none  &none       &none
-&kp LSHIFT  &none         &none       &none       &none       &kp LS(LBKT)   &none   &none   &kp LS(N6)  &none         &none         &none  &none       &none
-&none       &none         &none       &trans      &trans      &trans         &trans  &trans  &trans      &none         &none         &none  &none       &none
+&none       &none       &none       &none       &none       &none                          &none       &none         &none         &none  &none       &none
+&none       &kp LS(N7)  &none       &kp LS(N1)  &kp LS(N2)  &kp LS(EQUAL)                  &kp INT3    &kp LS(INT1)  &kp LS(INT3)  &none  &kp LS(N5)  &none
+&none       &kp LBKT    &kp LS(N3)  &kp LS(N4)  &none       &none          &none   &none   &kp EQUAL   &none         &none         &none  &none       &none
+&kp LSHIFT  &none       &none       &none       &none       &kp LS(LBKT)   &none   &none   &kp LS(N6)  &none         &none         &none  &none       &none
+&none       &none       &none       &trans      &trans      &trans         &trans  &trans  &trans      &none         &none         &none  &none       &none
             >;
         };
 
